@@ -128,3 +128,4 @@ pub trait Tool: Send + Sync {
     /// ```
     async fn call(&self, arguments: &Value) -> Result<Value, String>;
 
+}
