@@ -101,5 +101,4 @@ pub use utils::{
 };
 
 // Re-export the extract macro
-pub use extract;
 pub use validation::{validate_prompt_name, validate_resource_uri, validate_tool_name};
