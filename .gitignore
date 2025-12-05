@@ -43,3 +43,4 @@ lcov.info
 *.gcno
 *.gcov
 
+docs/archive/*.md
