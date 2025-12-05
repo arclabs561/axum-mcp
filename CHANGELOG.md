@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0] - 2025-01-XX
+## [0.2.0] - 2025-12-04
 
 ### Changed
 - **Renamed crate from `mcp-axum` to `axum-mcp`** - Aligns with Rust ecosystem convention (`axum-` prefix for Axum extensions)
@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed unused imports across test files and examples
 - Fixed clippy warnings (unused mut, manual string stripping)
 
-## [0.1.0] - 2025-01-XX
+## [0.1.0] - 2025-12-04
 
 ### Added
 - Initial release

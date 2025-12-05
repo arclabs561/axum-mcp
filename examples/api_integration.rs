@@ -7,7 +7,7 @@
 //! - JSON response parsing
 
 use async_trait::async_trait;
-use axum_mcp::{McpServer, Tool};
+use axum_mcp::{extract_string, extract_integer, McpServer, Tool};
 use serde_json::{json, Value};
 
 /// GitHub API tool that fetches repository information.
@@ -37,15 +37,8 @@ impl Tool for GitHubTool {
     }
 
     async fn call(&self, arguments: &Value) -> Result<Value, String> {
-        let owner = arguments
-            .get("owner")
-            .and_then(|v| v.as_str())
-            .ok_or_else(|| "Missing 'owner' parameter".to_string())?;
-
-        let repo = arguments
-            .get("repo")
-            .and_then(|v| v.as_str())
-            .ok_or_else(|| "Missing 'repo' parameter".to_string())?;
+        let owner = extract_string(arguments, "owner")?;
+        let repo = extract_string(arguments, "repo")?;
 
         let url = format!("https://api.github.com/repos/{}/{}", owner, repo);
 
@@ -88,10 +81,7 @@ impl Tool for JsonPlaceholderTool {
     }
 
     async fn call(&self, arguments: &Value) -> Result<Value, String> {
-        let post_id = arguments
-            .get("post_id")
-            .and_then(|v| v.as_u64())
-            .ok_or_else(|| "Missing or invalid 'post_id' parameter".to_string())?;
+        let post_id = extract_integer(arguments, "post_id")?;
 
         if !(1..=100).contains(&post_id) {
             return Err("post_id must be between 1 and 100".to_string());
@@ -140,10 +130,7 @@ impl Tool for IpGeolocationTool {
     }
 
     async fn call(&self, arguments: &Value) -> Result<Value, String> {
-        let ip = arguments
-            .get("ip")
-            .and_then(|v| v.as_str())
-            .ok_or_else(|| "Missing 'ip' parameter".to_string())?;
+        let ip = extract_string(arguments, "ip")?;
 
         // In a real implementation, you'd call an IP geolocation API
         // For this example, return mock data
