@@ -7,7 +7,7 @@
 //! - JSON response parsing
 
 use async_trait::async_trait;
-use axum_mcp::{extract_string, extract_integer, McpServer, Tool};
+use axum_mcp::{extract_integer, extract_string, McpServer, Tool};
 use serde_json::{json, Value};
 
 /// GitHub API tool that fetches repository information.
