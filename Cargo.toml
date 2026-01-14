@@ -3,7 +3,7 @@ name = "axum-mcp"
 version = "0.2.0"
 edition = "2021"
 rust-version = "1.75"
-license = "MIT OR Apache-2.0"
+license = "MIT"
 description = "HTTP-based MCP server framework for Rust"
 keywords = ["mcp", "model-context-protocol", "axum", "server", "agent", "ai", "http", "rest", "framework"]
 categories = ["web-programming", "api-bindings", "asynchronous"]
@@ -39,4 +39,3 @@ testing = []
 [dev-dependencies]
 tokio-test = "0.4"
 http-body-util = "0.1"
-
