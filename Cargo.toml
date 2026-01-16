@@ -3,9 +3,9 @@ name = "axum-mcp"
 version = "0.2.0"
 edition = "2021"
 rust-version = "1.75"
-license = "MIT"
-description = "HTTP transport for Model Context Protocol servers"
-keywords = ["mcp", "model-context-protocol", "axum", "server", "agent", "ai", "http", "rest", "framework"]
+license = "MIT OR Apache-2.0"
+description = "MCP server framework (HTTP via axum, stdio via rmcp)"
+keywords = ["mcp", "model-context-protocol", "axum", "stdio", "server", "http"]
 categories = ["web-programming", "api-bindings", "asynchronous"]
 repository = "https://github.com/arclabs561/axum-mcp"
 homepage = "https://docs.rs/axum-mcp"
@@ -14,15 +14,17 @@ readme = "README.md"
 authors = ["Arc <attobop@gmail.com>"]
 
 [lib]
+# Expose the library crate name as `axum_mcp` (historical/public API),
+# while keeping the package name as `axum-mcp`.
+name = "axum_mcp"
 # proc-macro = true  # Commented out - this is a library crate, not a proc-macro crate
-# Proc macros will be in a separate axum-mcp-macros crate
 
 [dependencies]
 axum = "0.7"
-tokio = { version = "1", features = ["full"] }
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-thiserror = "2"
+tokio = { version = "1", features = ["full", "io-std"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
 tower = { version = "0.5", features = ["util"] }
 tower-http = { version = "0.5", features = ["cors", "trace", "request-id", "limit"] }
 tracing = "0.1"
@@ -30,11 +32,14 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 async-trait = "0.1"
 jsonschema = "0.19"
 uuid = { version = "1", features = ["v4"] }
+axum-mcp-macros = { path = "../axum-mcp-macros", optional = true }
+rmcp = { version = "0.12.0", optional = true, features = ["server", "transport-io"] }
 
 [features]
 default = []
 testing = []
-# Future: macros feature for procedural macro support via axum-mcp-macros crate
+macros = ["dep:axum-mcp-macros"]
+stdio = ["dep:rmcp"]
 
 [dev-dependencies]
 tokio-test = "0.4"
